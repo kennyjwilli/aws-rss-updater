@@ -25,10 +25,8 @@
     client
     (send-email-req from to subject body)))
 
-;; look into bulk email sending
 (defn send-feed-update-email
-  [client emails feed-url post-title post-url]
-  (doseq [email emails]
-    (send-email client "rssflight@gmail.com" email
-                (str "RSS Update: " feed-url)
-                (str post-title ": " post-url))))
+  [client email feed-url post-title post-url]
+  (send-email client "rssflight@gmail.com" email
+              (str "RSS Update: " feed-url)
+              (str post-title ": " post-url)))
