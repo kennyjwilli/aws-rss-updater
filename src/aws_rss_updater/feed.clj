@@ -1,4 +1,4 @@
-(ns rssflight.feed
+(ns aws-rss-updater.feed
   (:require
     [clojure.set :as sets]
     [org.httpkit.client :as http]

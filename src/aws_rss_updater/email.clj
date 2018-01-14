@@ -1,4 +1,4 @@
-(ns rssflight.email
+(ns aws-rss-updater.email
   (:import (com.amazonaws.services.simpleemail AmazonSimpleEmailServiceClient)
            (com.amazonaws.regions Regions)
            (com.amazonaws.services.simpleemail.model Destination Body Content SendEmailRequest Message)))
@@ -27,6 +27,6 @@
 
 (defn send-feed-update-email
   [client email feed-url post-title post-url]
-  (send-email client "rssflight@gmail.com" email
+  (send-email client "aws-rss-updater@gmail.com" email
               (str "RSS Update: " feed-url)
               (str post-title ": " post-url)))
