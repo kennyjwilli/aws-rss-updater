@@ -1,12 +1,12 @@
 (ns aws-rss-updater.email
   (:import (com.amazonaws.services.simpleemail AmazonSimpleEmailServiceClient)
-           (com.amazonaws.regions Regions)
            (com.amazonaws.services.simpleemail.model Destination Body Content SendEmailRequest Message)))
 
 (defn mk-client
-  []
-  (.withRegion (AmazonSimpleEmailServiceClient.)
-               (Regions/US_EAST_1)))
+  [^String region]
+  (.build
+    (doto (AmazonSimpleEmailServiceClient/builder)
+      (.withRegion region))))
 
 (defn ->vec
   [x]
@@ -27,6 +27,6 @@
 
 (defn send-feed-update-email
   [client email feed-url post-title post-url]
-  (send-email client "aws-rss-updater@gmail.com" email
+  (send-email client email email
               (str "RSS Update: " feed-url)
               (str post-title ": " post-url)))
