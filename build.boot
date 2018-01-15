@@ -16,7 +16,8 @@
                           [com.amazonaws/aws-java-sdk-s3 "1.11.256"]
                           [com.amazonaws/aws-java-sdk-lambda "1.11.256"]
                           [org.clojars.kennyjwilli/feedparser-clj "0.6.0"]
-                          [com.taoensso/nippy "2.14.0"]])
+                          [com.taoensso/nippy "2.14.0"]
+                          [com.cognitect/transit-clj "0.8.300"]])
 
 (require
   '[adzerk.boot-test :refer [test]]
