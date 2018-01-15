@@ -6,7 +6,6 @@
     [aws-rss-updater.model :as model]
     [aws-rss-updater.lambda :as lambda]))
 
-(def email-client (email/mk-client))
 (def test-feed "http://prog21.dadgum.com/atom.xml")
 
 (defn posts-to-send
@@ -17,8 +16,9 @@
 
 (defn send-uri-update!
   [settings feed email post-uri post-title]
-  (let [feed-url (:feed/url feed)]
-    (model/mark-post-as-sent settings feed-url post-uri)
+  (let [feed-url (:feed/url feed)
+        email-client (email/mk-client (:region settings))]
+    (model/mark-post-as-sent! settings feed-url post-uri)
     (log/info "Sending post update..." :uri post-uri :email email)
     (email/send-feed-update-email email-client email feed-url post-title post-uri)
     nil))
