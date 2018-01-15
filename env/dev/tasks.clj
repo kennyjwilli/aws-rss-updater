@@ -8,7 +8,7 @@
   [n jar-name VAL str "Name of the JAR file."]
   (assert jar-name ":jar-name is required.")
   (comp
-    (tasks/aot :namespace #{'rssflight.lambdafns})
+    (tasks/aot :namespace #{'aws-rss-updater.lambdafns})
     (tasks/uber)
     (tasks/jar :file jar-name)
     (tasks/sift :include #{(re-pattern jar-name)})))
