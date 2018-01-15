@@ -26,9 +26,14 @@
 (defn do-feed-updates
   [settings feed email]
   (let [posts (posts-to-send feed)]
-    (when-not (empty? posts)
-      (doseq [{:keys [uri title]} posts]
-        (send-uri-update! settings feed email uri title)))))
+    (if (empty? posts)
+      (log/info "No new posts." :feed (:feed/url feed))
+      (do
+        (log/info "Feed updates found. Sending post updates..."
+                  :feed (:feed/url feed)
+                  :post-uris (mapv :uri posts))
+        (doseq [{:keys [uri title]} posts]
+          (send-uri-update! settings feed email uri title))))))
 
 (defn invoke-feed-updater
   "Asynchronously invokes the `aws-rss-updater.SendFeedUpdates` lambda fn, passing
@@ -44,4 +49,5 @@
   (let [state (model/get-state settings)
         email (::model/email state)]
     (doseq [feed (::model/feeds state)]
+      (log/info "Start update function for" (:feed/url feed))
       (invoke-feed-updater settings feed email))))
