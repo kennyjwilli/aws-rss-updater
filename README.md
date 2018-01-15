@@ -55,13 +55,14 @@ boot unsubscribe-feed feed-url
 ## Implementation
 
 - Info is stored in a S3 file
-- Terraform state stored in same S3 bucket
 - Downloads urls
 - Serialize files with Nippy
 
 ## TODO
 
 - Create a CLI for all Boot functions
+- Add email templates
+- Use mustache templates for email template
 - Think about re-writing in CLJS if perf is an issue
 
 ## License
