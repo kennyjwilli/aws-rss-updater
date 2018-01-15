@@ -58,7 +58,8 @@
                            (.withZipFile (file->bytebuffer file))))
               (.withRole role-arn)
               (.withHandler handler)
-              (.withMemorySize (int 1024)))]
+              (.withMemorySize (int 1024))
+              (.withTimeout (int 60)))]
     (.createFunction client req)))
 
 (defn update-function-code
